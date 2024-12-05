@@ -162,5 +162,3 @@ Contributions are welcome! Feel free to open an issue or submit a pull request.
 For any questions or feedback, please contact the author.
 
 ---
-
-Replace `<your-username>` in the repository URL with your GitHub username and customize the details further if needed.
