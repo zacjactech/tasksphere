@@ -32,8 +32,13 @@ jobs:
       - name: Lint code
         run: npm run lint
 
+      - name: Set up Prisma
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
+          npx prisma migrate deploy
+
       - name: Run database migrations (staging)
-        run: npm run migrate
+        run: npx prisma migrate deploy
 
   # Continuous Deployment Job
   cd:
