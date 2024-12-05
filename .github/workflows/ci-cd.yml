@@ -1,74 +1,80 @@
-name: CI/CD Pipeline
+name: Backend CI/CD Pipeline
 
 on:
-  pull_request:
+  push:
     branches:
       - main
       - develop
-  push:
+  pull_request:
     branches:
       - main
 
 jobs:
-  lint-and-test:
-    name: Lint and Test
+  # Continuous Integration Job
+  ci:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
-    - name: Install Dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Lint Code
-      run: npm run lint
+      - name: Run unit tests
+        run: npm test
 
-    - name: Run Tests
-      run: npm test
+      - name: Lint code
+        run: npm run lint
 
-  build:
-    name: Build Application
+      - name: Run database migrations (staging)
+        run: npm run migrate
+
+  # Continuous Deployment Job
+  cd:
     runs-on: ubuntu-latest
-    needs: lint-and-test
-
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-
-    - name: Install Dependencies
-      run: npm install
-
-    - name: Build Project
-      env:
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-      run: npm run build
-
-    - name: Debug Environment Variables
-      run: printenv | grep DATABASE_URL
-
-  deploy:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    needs: build
+    needs: ci
     if: github.ref == 'refs/heads/main'
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Deploy
-      run: |
-        echo "Deploying application..."
-        # Add your deployment script here (e.g., SSH to server, deploy to a platform like AWS, Heroku, or Vercel)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the application
+        run: npm run build
+
+      - name: Deploy to Production
+        run: |
+          ssh user@your-server-ip "cd /your-app-directory && git pull origin main && npm install && npm run migrate && pm2 restart your-app"
+
+  # Docker Build and Deploy Job (Optional)
+  docker:
+    runs-on: ubuntu-latest
+    needs: ci
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: docker build -t your-docker-image .
+
+      - name: Push Docker image to DockerHub
+        run: docker push your-docker-image

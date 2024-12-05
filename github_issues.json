@@ -1,0 +1,60 @@
+{
+  "issues": [
+      {
+        "title": "Set up NestJS Project and Database Connection",
+        "body": "### Task Description:\n\n- Set up the basic structure for the NestJS project.\n- Initialize the project using the NestJS CLI and configure the required dependencies.\n- Set up a PostgreSQL database (or another preferred database) and configure the connection within the NestJS project.\n- Create the environment configuration files (.env) for storing sensitive data (e.g., database credentials).\n- Test the database connection to ensure it’s working correctly.\n- Set up a version control system (Git) and initialize the project repository on GitHub.\n\n### Expected Outcome:\n- The NestJS project is set up with a working database connection.\n- Environment configuration is set up securely.\n- The project is initialized in a GitHub repository.",
+        "assignees": ["zacjactech"],
+        "labels": ["backend"],
+        "milestone": "2 days"
+      },
+      {
+        "title": "Implement User Management (Signup, Login, JWT)",
+        "body": "### Task Description:\n\n- Implement the user authentication system using JWT (JSON Web Token).\n- Create endpoints for user registration (Signup) and login (Login) with proper input validation.\n- On successful login, generate a JWT token and send it back to the client.\n- Ensure that the JWT is used for authenticating further requests by adding an `auth` guard to protect private routes.\n- Store user credentials securely in the database (hashed passwords).\n- Implement validation for the input fields using class-validator and handle error responses for invalid input.\n\n### Expected Outcome:\n- User can sign up and log in using their credentials.\n- JWT token is issued and used for authentication on protected routes.\n- Input validation is in place, and users receive clear error messages when input is invalid.",
+        "assignees": ["Gbotemi-ojo"],
+        "labels": ["backend", "user-management"],
+        "milestone": "3 days"
+      },
+      {
+        "title": "Build CRUD Endpoints for Tasks",
+        "body": "### Task Description:\n\n- Develop CRUD (Create, Read, Update, Delete) functionality for tasks.\n- Create a Task model with fields such as title, description, due date, and status.\n- Implement the following endpoints:\n  - `POST /tasks` – Create a new task.\n  - `GET /tasks` – Retrieve a list of tasks (with optional filtering and sorting).\n  - `GET /tasks/:id` – Retrieve a single task by ID.\n  - `PUT /tasks/:id` – Update task details.\n  - `DELETE /tasks/:id` – Delete a task.\n- Ensure that only authenticated users can access the endpoints.\n- Implement role-based access control (RBAC) to limit actions based on user roles (e.g., admin, user).\n\n### Expected Outcome:\n- Task CRUD functionality is fully implemented.\n- Tasks can be created, viewed, updated, and deleted.\n- Only authorized users can perform certain actions (e.g., admins can delete tasks).",
+        "assignees": ["zacjactech"],
+        "labels": ["backend", "task-management"],
+        "milestone": "4 days"
+      },
+      {
+        "title": "Add Categories Module for Tasks",
+        "body": "### Task Description:\n\n- Develop a Categories module to categorize tasks.\n- Create a `Category` model with fields such as name and description.\n- Add endpoints to manage categories, including:\n  - `POST /categories` – Create a new category.\n  - `GET /categories` – Retrieve a list of categories.\n  - `GET /categories/:id` – Retrieve a single category by ID.\n  - `PUT /categories/:id` – Update a category.\n  - `DELETE /categories/:id` – Delete a category.\n- Add a foreign key to the `Task` model to associate each task with a category.\n- Implement category-based filtering for tasks, allowing users to filter tasks by category.\n\n### Expected Outcome:\n- Categories module is created and can manage task categories.\n- Users can filter tasks by category.\n- Categories can be created, updated, and deleted.",
+        "assignees": ["Gbotemi-ojo"],
+        "labels": ["backend", "task-management"],
+        "milestone": "2 days"
+      },
+      {
+        "title": "Set Up Swagger for API Documentation",
+        "body": "### Task Description:\n\n- Integrate Swagger into the NestJS project for API documentation.\n- Set up the Swagger module in NestJS and configure the basic metadata for the API documentation.\n- Document all API endpoints using decorators such as `@ApiOperation`, `@ApiResponse`, and `@ApiParam`.\n- Ensure that each route’s input/output models are properly documented.\n- Configure authentication in Swagger to allow for token-based authentication (JWT) in the documentation interface.\n\n### Expected Outcome:\n- Swagger is integrated and displays an interactive API documentation interface.\n- All endpoints, request parameters, and response structures are clearly documented.\n- JWT authentication is properly integrated into the Swagger UI.",
+        "assignees": ["Gbotemi-ojo"],
+        "labels": ["backend", "documentation"],
+        "milestone": "3 days"
+      },
+      {
+        "title": "Integrate Blockchain (Optional) for Task Logging",
+        "body": "### Task Description:\n\n- Integrate blockchain functionality into the application to log completed tasks on the blockchain.\n- Use `ethers.js` or `Web3.js` to interact with a blockchain (e.g., Ethereum or Binance Smart Chain).\n- When a task is marked as complete, the details of the task (e.g., task ID, completion time, etc.) will be logged to the blockchain as a transaction.\n- Ensure that the task logging on the blockchain is secure and optimized for gas fees.\n- Provide a way to view the task logs from the blockchain via the API.\n\n### Expected Outcome:\n- Completed tasks are logged on the blockchain.\n- Users can view task logs via the API.\n- Blockchain integration is secure and optimized.",
+        "assignees": ["zacjactech"],
+        "labels": ["backend", "blockchain"],
+        "milestone": "5 days"
+      },
+      {
+        "title": "Write Unit and Integration Tests",
+        "body": "### Task Description:\n\n- Write unit tests for individual modules in the application (e.g., User Management, Task Management, Categories, etc.) using Jest and Supertest.\n- Write integration tests to verify that different modules interact correctly (e.g., user can create a task after logging in).\n- Ensure that tests cover both happy and sad paths (e.g., valid and invalid inputs).\n- Set up a test environment that mirrors production as closely as possible.\n- Ensure all tests are passing before merging code.\n\n### Expected Outcome:\n- Unit and integration tests are written for each module.\n- Tests cover edge cases and error handling.\n- All tests pass in the CI/CD pipeline.",
+        "assignees": ["zacjactech"],
+        "labels": ["testing"],
+        "milestone": "4 days"
+      },
+      {
+        "title": "Deploy API to a Platform (Heroku or Render)",
+        "body": "### Task Description:\n\n- Set up deployment to a cloud platform (e.g., Heroku, Render, or AWS).\n- Configure the CI/CD pipeline to automatically deploy the API when changes are pushed to the `main` branch.\n- Ensure that the environment variables (e.g., database credentials, JWT secret) are properly set up in the cloud environment.\n- Test the deployment process to ensure that the API is accessible and functioning as expected.\n\n### Expected Outcome:\n- The application is deployed and accessible on a cloud platform.\n- The CI/CD pipeline is functional, and changes are automatically deployed.",
+        "assignees": ["Gbotemi-ojo"],
+        "labels": ["deployment"],
+        "milestone": "3 days"
+      }
+    ] 
+}
